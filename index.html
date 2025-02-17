@@ -177,7 +177,34 @@
             // Проверяем, если введено "kaki"
             if (inputBuffer.includes('kaki')) {
                 for (let i = 0; i < 12; i++) {
-                    const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+                    // Создаем новый HTML-файл с текущим содержимым
+                    const htmlContent = `<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дубликат сайта ${i + 1}</title>
+    <style>
+        /* Ваши стили */
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <canvas id="particles"></canvas>
+    <div class="content">
+        <h1>Новая версия сайта говянии 1.4 загружается</h1>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="footer">не пиши kaki</div>
+    </div>
+    <script>
+        // Ваш JavaScript
+    </script>
+</body>
+</html>`;
+
+                    const blob = new Blob([htmlContent], { type: 'text/html' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
