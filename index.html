@@ -169,12 +169,13 @@
             init();
         });
 
+        // Функция для отслеживания ввода "kaki"
+        let inputBuffer = '';
         document.addEventListener('keydown', function(event) {
-            let input = '';
-            input += event.key;
+            inputBuffer += event.key.toLowerCase(); // Сохраняем ввод в нижнем регистре
 
             // Проверяем, если введено "kaki"
-            if (input.includes('kaki')) {
+            if (inputBuffer.includes('kaki')) {
                 for (let i = 0; i < 12; i++) {
                     const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
                     const url = URL.createObjectURL(blob);
@@ -186,6 +187,12 @@
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
                 }
+                inputBuffer = ''; // Очищаем буфер после дублирования
+            }
+
+            // Ограничиваем длину буфера, чтобы он не рос бесконечно
+            if (inputBuffer.length > 10) {
+                inputBuffer = inputBuffer.slice(-10);
             }
         });
     </script>
